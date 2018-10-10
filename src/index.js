@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
     modalViewBottom: {
         height: 215,
         justifyContent: 'center',
-        backgroundColor: '#D0D4DB',
+        backgroundColor: '#FFF',
     },
     done: {
         color: '#007AFE',
