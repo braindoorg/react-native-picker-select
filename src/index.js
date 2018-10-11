@@ -159,11 +159,9 @@ export default class RNPickerSelect extends PureComponent {
     }
 
     onValueChange(value, index) {
-        this.props.onValueChange(value, index);
-
         this.setState({
             selectedItem: this.state.items[index],
-        }, () => {Platform.OS == 'ios' ? {} : this.props.validate()});
+        }, () => {Platform.OS == 'ios' ? {} : this.props.onValueChange(this.state.selectedItem)});
     }
 
     setInputRef(ref) {
@@ -190,7 +188,7 @@ export default class RNPickerSelect extends PureComponent {
         this.setState({
             animationType: animate ? this.props.animationType : undefined,
             showPicker: !this.state.showPicker,
-        }, () => {this.state.showPicker ? {} : this.props.validate()});
+        }, () => {this.state.showPicker ? {} : this.props.onValueChange(this.state.selectedItem)});
         if (!this.state.showPicker && this.inputRef) {
             this.inputRef.focus();
             this.inputRef.blur();
@@ -445,7 +443,7 @@ const styles = StyleSheet.create({
     modalViewBottom: {
         height: 215,
         justifyContent: 'center',
-        backgroundColor: '#D0D4DB',
+        backgroundColor: '#FFF',
     },
     done: {
         color: '#007AFE',
