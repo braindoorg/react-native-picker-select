@@ -43,7 +43,7 @@ export default class RNPickerSelect extends PureComponent {
         doneText: PropTypes.string,
         onDonePress: PropTypes.func,
         placeholderTextColor: ColorPropType,
-        validate: PropTypes.func
+        validate: PropTypes.func,
     };
 
     static defaultProps = {
@@ -159,9 +159,14 @@ export default class RNPickerSelect extends PureComponent {
     }
 
     onValueChange(value, index) {
-        this.setState({
-            selectedItem: this.state.items[index],
-        }, () => {Platform.OS == 'ios' ? {} : this.props.onValueChange(this.state.selectedItem)});
+        this.setState(
+            {
+                selectedItem: this.state.items[index],
+            },
+            () => {
+                Platform.OS == 'ios' ? {} : this.props.onValueChange(this.state.selectedItem);
+            }
+        );
     }
 
     setInputRef(ref) {
@@ -185,10 +190,15 @@ export default class RNPickerSelect extends PureComponent {
         if (this.props.disabled) {
             return;
         }
-        this.setState({
-            animationType: animate ? this.props.animationType : undefined,
-            showPicker: !this.state.showPicker,
-        }, () => {this.state.showPicker ? {} : this.props.onValueChange(this.state.selectedItem)});
+        this.setState(
+            {
+                animationType: animate ? this.props.animationType : undefined,
+                showPicker: !this.state.showPicker,
+            },
+            () => {
+                this.state.showPicker ? {} : this.props.onValueChange(this.state.selectedItem);
+            }
+        );
         if (!this.state.showPicker && this.inputRef) {
             this.inputRef.focus();
             this.inputRef.blur();
@@ -309,6 +319,7 @@ export default class RNPickerSelect extends PureComponent {
         return (
             <View style={[styles.viewContainer, this.props.style.viewContainer]}>
                 <TouchableWithoutFeedback
+                    style={[this.props.style.triggerContainer]}
                     onPress={() => {
                         this.togglePicker(true);
                     }}
