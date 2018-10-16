@@ -318,7 +318,7 @@ export default class RNPickerSelect extends PureComponent {
     renderIOS() {
         console.log(this.props.styles);
         return (
-            <View style={[styles.viewContainer, this.props.style.viewContainer]}>
+            <View style={[styles.viewContainer, this.props.styles.viewContainer]}>
                 <TouchableWithoutFeedback
                     style={[this.props.styles.triggerContainer]}
                     onPress={() => {
