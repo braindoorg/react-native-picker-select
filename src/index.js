@@ -120,7 +120,7 @@ export default class RNPickerSelect extends PureComponent {
 
     constructor(props) {
         super(props);
-
+        console.log('CONSTRUCTOR', props);
         const items = RNPickerSelect.handlePlaceholder({ placeholder: props.placeholder }).concat(
             props.items
         );
