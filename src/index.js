@@ -319,7 +319,7 @@ export default class RNPickerSelect extends PureComponent {
 
     renderIOS() {
         return (
-            <View style={[styles.viewContainer, this.props.styles.viewContainer]}>
+            <View style={[styles.viewContainer, this.props.style.viewContainer]}>
                 <TouchableWithoutFeedback
                     onPress={() => {
                         this.togglePicker(true);
@@ -360,7 +360,7 @@ export default class RNPickerSelect extends PureComponent {
                 style={[
                     styles.viewContainer,
                     this.props.style.headlessAndroidContainer,
-                    this.props.styles.viewContainer,
+                    this.props.style.viewContainer,
                 ]}
             >
                 {this.props.children}
