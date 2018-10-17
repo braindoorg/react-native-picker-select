@@ -120,7 +120,6 @@ export default class RNPickerSelect extends PureComponent {
 
     constructor(props) {
         super(props);
-        console.log('CONSTRUCTOR', props);
         const items = RNPickerSelect.handlePlaceholder({ placeholder: props.placeholder }).concat(
             props.items
         );
@@ -294,7 +293,10 @@ export default class RNPickerSelect extends PureComponent {
     renderTextInputOrChildren() {
         if (this.props.children) {
             return (
-                <View pointerEvents="box-only" style={this.props.style.inputIOSContainer}>
+                <View
+                    pointerEvents="box-only"
+                    style={[this.props.style.inputIOSContainer, this.props.style.triggerContainer]}
+                >
                     {this.props.children}
                 </View>
             );
@@ -316,11 +318,9 @@ export default class RNPickerSelect extends PureComponent {
     }
 
     renderIOS() {
-        console.log(this.props.styles);
         return (
             <View style={[styles.viewContainer, this.props.styles.viewContainer]}>
                 <TouchableWithoutFeedback
-                    style={[this.props.styles.triggerContainer]}
                     onPress={() => {
                         this.togglePicker(true);
                     }}
@@ -356,7 +356,13 @@ export default class RNPickerSelect extends PureComponent {
 
     renderAndroidHeadless() {
         return (
-            <View style={[styles.viewContainer, this.props.style.headlessAndroidContainer]}>
+            <View
+                style={[
+                    styles.viewContainer,
+                    this.props.style.headlessAndroidContainer,
+                    this.props.styles.viewContainer,
+                ]}
+            >
                 {this.props.children}
                 <Picker
                     style={{ position: 'absolute', top: 0, width: 1000, height: 1000 }}
