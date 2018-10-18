@@ -43,7 +43,7 @@ export default class RNPickerSelect extends PureComponent {
         doneText: PropTypes.string,
         onDonePress: PropTypes.func,
         placeholderTextColor: ColorPropType,
-        validate: PropTypes.func
+        validate: PropTypes.func,
     };
 
     static defaultProps = {
@@ -120,7 +120,6 @@ export default class RNPickerSelect extends PureComponent {
 
     constructor(props) {
         super(props);
-
         const items = RNPickerSelect.handlePlaceholder({ placeholder: props.placeholder }).concat(
             props.items
         );
@@ -159,9 +158,14 @@ export default class RNPickerSelect extends PureComponent {
     }
 
     onValueChange(value, index) {
-        this.setState({
-            selectedItem: this.state.items[index],
-        }, () => {Platform.OS == 'ios' ? {} : this.props.onValueChange(this.state.selectedItem)});
+        this.setState(
+            {
+                selectedItem: this.state.items[index],
+            },
+            () => {
+                Platform.OS == 'ios' ? {} : this.props.onValueChange(this.state.selectedItem);
+            }
+        );
     }
 
     setInputRef(ref) {
@@ -185,10 +189,15 @@ export default class RNPickerSelect extends PureComponent {
         if (this.props.disabled) {
             return;
         }
-        this.setState({
-            animationType: animate ? this.props.animationType : undefined,
-            showPicker: !this.state.showPicker,
-        }, () => {this.state.showPicker ? {} : this.props.onValueChange(this.state.selectedItem)});
+        this.setState(
+            {
+                animationType: animate ? this.props.animationType : undefined,
+                showPicker: !this.state.showPicker,
+            },
+            () => {
+                this.state.showPicker ? {} : this.props.onValueChange(this.state.selectedItem);
+            }
+        );
         if (!this.state.showPicker && this.inputRef) {
             this.inputRef.focus();
             this.inputRef.blur();
@@ -284,7 +293,10 @@ export default class RNPickerSelect extends PureComponent {
     renderTextInputOrChildren() {
         if (this.props.children) {
             return (
-                <View pointerEvents="box-only" style={this.props.style.inputIOSContainer}>
+                <View
+                    pointerEvents="box-only"
+                    style={[this.props.style.inputIOSContainer, this.props.style.triggerContainer]}
+                >
                     {this.props.children}
                 </View>
             );
@@ -344,7 +356,13 @@ export default class RNPickerSelect extends PureComponent {
 
     renderAndroidHeadless() {
         return (
-            <View style={[styles.viewContainer, this.props.style.headlessAndroidContainer]}>
+            <View
+                style={[
+                    styles.viewContainer,
+                    this.props.style.headlessAndroidContainer,
+                    this.props.style.viewContainer,
+                ]}
+            >
                 {this.props.children}
                 <Picker
                     style={{ position: 'absolute', top: 0, width: 1000, height: 1000 }}
