@@ -189,7 +189,6 @@ export default class RNPickerSelect extends PureComponent {
             this.props.onFocus()
         }
 
-
         if (this.props.disabled) {
             return;
         }
