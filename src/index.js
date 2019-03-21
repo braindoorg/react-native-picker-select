@@ -43,7 +43,8 @@ export default class RNPickerSelect extends PureComponent {
         doneText: PropTypes.string,
         onDonePress: PropTypes.func,
         placeholderTextColor: ColorPropType,
-        validate: PropTypes.func,
+        onBlur: PropTypes.func,
+        onFocus: PropTypes.func,
     };
 
     static defaultProps = {
@@ -65,6 +66,8 @@ export default class RNPickerSelect extends PureComponent {
         doneText: 'Done',
         onDonePress: null,
         placeholderTextColor: '#C7C7CD',
+        onBlur: null,
+        onFocus: null,
     };
 
     static handlePlaceholder({ placeholder }) {
@@ -195,7 +198,12 @@ export default class RNPickerSelect extends PureComponent {
                 showPicker: !this.state.showPicker,
             },
             () => {
-                this.state.showPicker ? {} : this.props.onValueChange(this.state.selectedItem);
+                if (this.state.showPicker) {
+                    this.props.onFocus();
+                } else {
+                    this.props.onValueChange(this.state.selectedItem);
+                    this.props.onBlur();
+                }
             }
         );
         if (!this.state.showPicker && this.inputRef) {
