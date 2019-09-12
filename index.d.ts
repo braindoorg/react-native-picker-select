@@ -1,27 +1,35 @@
-/// <reference types="react" />
+// / <reference types="react" />
 
 declare module 'react-native-picker-select' {
     export interface Item {
         label: string;
         value: any;
-        key?: string;
+        key?: string | number;
         color?: string;
     }
-    type ModeOptions = 'dialog' | 'dropdown';
     export interface PickerProps {
         onValueChange: (value: any, index: number) => void;
         items: Item[];
+        value?: any;
         placeholder?: Item | {};
         disabled?: boolean;
-        value?: any;
         itemKey?: string | number;
         style?: object;
-        hideIcon?: boolean;
-        hideDoneBar?: boolean;
+        children?: any;
+        placeholderTextColor?: string; // deprecated
+        useNativeAndroidPickerStyle?: boolean;
+        hideDoneBar?: boolean; // deprecated
+        doneText?: string;
+        onDonePress?: () => void;
         onUpArrow?: () => void;
         onDownArrow?: () => void;
-        mode?: ModeOptions;
-        onDonePress?: () => void;
+        onOpen?: () => void;
+        onClose?: () => void;
+        modalProps?: object;
+        textInputProps?: object;
+        pickerProps?: object;
+        Icon?: React.ReactNode;
+        InputAccessoryView?: React.ReactNode;
     }
     class Picker extends React.Component<PickerProps> {}
     export default Picker;
