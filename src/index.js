@@ -396,7 +396,7 @@ export default class RNPickerSelect extends PureComponent {
                         Platform.OS === 'ios' ? style.inputIOS : style.inputAndroid,
                         this.getPlaceholderStyle(),
                     ]}
-                    value={this.state.selectedItem.label}
+                    value={this.props.showValue ? this.state.selectedItem.value : this.state.selectedItem.label}
                     ref={this.setInputRef}
                     editable={false}
                     {...textInputProps}
