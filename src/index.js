@@ -304,7 +304,7 @@ export default class RNPickerSelect extends PureComponent {
                         this.props.style.inputIOS,
                         this.getPlaceholderStyle(),
                     ]}
-                    value={this.state.selectedItem.label}
+                    value={this.props.showValue ? this.state.selectedItem.value : this.state.selectedItem.label}
                     ref={this.setInputRef}
                 />
                 {this.renderIcon()}
