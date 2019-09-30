@@ -183,12 +183,6 @@ export default class RNPickerSelect extends PureComponent {
     }
 
     togglePicker(animate = false) {
-        if (this.state.showPicker) {
-            this.props.onBlur()
-        } else {
-            this.props.onFocus()
-        }
-
         if (this.props.disabled) {
             return;
         }
